@@ -1,0 +1,33 @@
+# For installation in RaspberryPi, Raspian 10:
+# Our application used python3 scripts
+# and in ordet to run we installed:
+
+pip3 install face_recognition
+pip3 install opencv-contrib-python
+pip3 install numpi
+apt install libatlas3-base
+
+# The client machines only need python3
+
+############### OPTIONAL, for more experimenting ############### 
+
+# if needed, to overcome a possible error:
+pip3 install -U numpy
+
+# optional, for better handling of python updates
+ln -sf python3 /usr/bin/python
+ln -sf pip3 /usr/bin/pip
+
+# related libraries - not needed for this application
+pip3 install imutils
+apt install fswebcam
+apt install libcanberra-gtk-module libcanberra-gtk3-module
+apt install libhdf5-dev
+
+# for using a usb camera
+fswebcam --device /dev/video0 image.jpg
+v4l2-ctl --list-formats-ext
+
+# commands for using the Pi internal camera
+raspistill -o /tmp/image.jpg
+v4l2-ctl --list-devices
