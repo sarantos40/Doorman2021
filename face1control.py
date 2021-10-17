@@ -69,12 +69,12 @@ while numpictures < maxpictures:
             else:
                 # if len(qfaceslst) == 1:
                 numpictures += 1
-                for tgt in addrs: tgts.add(tgt)
                 qname, pname = '?', filename
             visitors.append(pname)
             if nresults: tgts.add(addrs[ibest])
-        print(len(qfaceslst), tgts or '{}', ', '.join(visitors))
-        if sendaddr and tgts:
+        if not tgts: tgts = set(addrs) # If no target is selected
+        print(len(qfaceslst), tgts, ', '.join(visitors))
+        if sendaddr:
             for tgt in tgts: client(tgt, open(filename, 'rb').read(), qname, pname)
     else:
         print(f"Found nobody {numshots}.")

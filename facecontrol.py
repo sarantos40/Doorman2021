@@ -81,12 +81,12 @@ while numpictures < maxpictures:
                     print(f"Storing {filename}")
                     stream.seek(0)
                     open(filename, 'wb').write(stream.read())
-                for tgt in addrs: tgts.add(tgt)
                 qname, pname = '?', f'#{numpictures}'
             visitors.append(pname)
             if nresults: tgts.add(addrs[ibest])
-        print(len(qfaceslst), tgts or '{}', ', '.join(visitors))
-        if sendaddress and tgts:
+        if not tgts: tgts = set(addrs) # If no target is selected
+        print(len(qfaceslst), tgts, ', '.join(visitors))
+        if sendaddress:
             stream.seek(0)
             im = stream.read()
             for tgt in tgts: msgclient(sendaddress.format(tgt), im, qname, pname)
